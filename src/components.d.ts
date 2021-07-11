@@ -28,7 +28,7 @@ declare global {
 declare namespace LocalJSX {
     interface SMagicText {
         "highlights"?: HighlightDefinition[];
-        "onSegmentClick"?: (event: CustomEvent<Segment>) => void;
+        "onSegmentClick"?: (event: CustomEvent<Segment & { textContainer: HTMLElement }>) => void;
         "segmentHoverStyle"?: Partial<CSSStyleDeclaration>;
         "segmentStyle"?: Partial<CSSStyleDeclaration>;
         "text"?: string;

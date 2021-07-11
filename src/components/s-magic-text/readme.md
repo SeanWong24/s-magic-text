@@ -17,9 +17,9 @@
 
 ## Events
 
-| Event          | Description | Type                   |
-| -------------- | ----------- | ---------------------- |
-| `segmentClick` |             | `CustomEvent<Segment>` |
+| Event          | Description | Type                                                     |
+| -------------- | ----------- | -------------------------------------------------------- |
+| `segmentClick` |             | `CustomEvent<Segment & { textContainer: HTMLElement; }>` |
 
 
 ----------------------------------------------
