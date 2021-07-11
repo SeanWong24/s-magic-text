@@ -8,6 +8,7 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { HighlightDefinition, Segment } from "./components/s-magic-text/s-magic-text";
 export namespace Components {
     interface SMagicText {
+        "getSegments": () => Promise<Segment[]>;
         "highlights": HighlightDefinition[];
         "segmentHoverStyle": Partial<CSSStyleDeclaration>;
         "segmentStyle": Partial<CSSStyleDeclaration>;

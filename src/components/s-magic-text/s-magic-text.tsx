@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Host, h, ComponentInterface, Prop, State } from '@stencil/core';
+import { Component, Event, EventEmitter, Host, h, ComponentInterface, Prop, State, Method } from '@stencil/core';
 
 @Component({
   tag: 's-magic-text',
@@ -40,6 +40,11 @@ export class SMagicText implements ComponentInterface {
       segments.push(segment);
     });
     this.segments = segments;
+  }
+
+  @Method()
+  async getSegments() {
+    return this.segments;
   }
 
   render() {

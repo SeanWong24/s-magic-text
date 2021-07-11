@@ -19,8 +19,9 @@
       { start: 6, end: 11, tag: 'a', name: 'A', style: { color: 'blue' } },
       { start: 13, end: 17, tag: 'b', name: 'B', style: { color: 'red' } },
     ];
-    magicText.addEventListener('segmentClick', event => {
+    magicText.addEventListener('segmentClick', async event => {
       console.log(event.detail);
+      console.log(await event.currentTarget.getSegments());
     })
   </script>
 </body>

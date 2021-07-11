@@ -22,6 +22,19 @@
 | `segmentClick` |             | `CustomEvent<Segment & { textContainer: HTMLElement; }>` |
 
 
+## Methods
+
+### `getSegments() => Promise<Segment[]>`
+
+
+
+#### Returns
+
+Type: `Promise<Segment[]>`
+
+
+
+
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*
