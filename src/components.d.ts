@@ -5,57 +5,43 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { HighlightDefinition, Segment } from "./components/s-magic-text/s-magic-text";
 export namespace Components {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
+    interface SMagicText {
+        "highlights": HighlightDefinition[];
+        "segmentHoverStyle": Partial<CSSStyleDeclaration>;
+        "segmentStyle": Partial<CSSStyleDeclaration>;
+        "text": string;
     }
 }
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLSMagicTextElement extends Components.SMagicText, HTMLStencilElement {
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    var HTMLSMagicTextElement: {
+        prototype: HTMLSMagicTextElement;
+        new (): HTMLSMagicTextElement;
     };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
+        "s-magic-text": HTMLSMagicTextElement;
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
+    interface SMagicText {
+        "highlights"?: HighlightDefinition[];
+        "onSegmentClick"?: (event: CustomEvent<Segment>) => void;
+        "segmentHoverStyle"?: Partial<CSSStyleDeclaration>;
+        "segmentStyle"?: Partial<CSSStyleDeclaration>;
+        "text"?: string;
     }
     interface IntrinsicElements {
-        "my-component": MyComponent;
+        "s-magic-text": SMagicText;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "s-magic-text": LocalJSX.SMagicText & JSXBase.HTMLAttributes<HTMLSMagicTextElement>;
         }
     }
 }
