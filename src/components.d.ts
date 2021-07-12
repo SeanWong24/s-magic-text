@@ -12,6 +12,7 @@ export namespace Components {
         "highlights": HighlightDefinition[];
         "segmentHoverStyle": Partial<CSSStyleDeclaration>;
         "segmentStyle": Partial<CSSStyleDeclaration>;
+        "shouldReplaceTextWithTag": boolean;
         "text": string;
     }
 }
@@ -32,6 +33,7 @@ declare namespace LocalJSX {
         "onSegmentClick"?: (event: CustomEvent<Segment & { textContainer: HTMLElement }>) => void;
         "segmentHoverStyle"?: Partial<CSSStyleDeclaration>;
         "segmentStyle"?: Partial<CSSStyleDeclaration>;
+        "shouldReplaceTextWithTag"?: boolean;
         "text"?: string;
     }
     interface IntrinsicElements {

@@ -9,6 +9,7 @@ export class SMagicText implements ComponentInterface {
 
   @Prop() text: string;
   @Prop() highlights: HighlightDefinition[];
+  @Prop() shouldReplaceTextWithTag = false;
   @Prop() segmentStyle: Partial<CSSStyleDeclaration> = { cursor: 'pointer', userSelect: 'none' };
   @Prop() segmentHoverStyle: Partial<CSSStyleDeclaration> = { backgroundColor: 'orange' };
 
@@ -54,12 +55,14 @@ export class SMagicText implements ComponentInterface {
           {
             this.segments?.map(segment => (
               <span
-                title={segment?.highlightDefinition?.name}
+                title={this.shouldReplaceTextWithTag ? segment.text : segment?.highlightDefinition?.tag}
                 style={{ ...this.segmentStyle, ...(segment?.highlightDefinition?.style) } as any}
                 onMouseOver={event => this.setStyle(event.currentTarget as HTMLElement, { ...this.segmentStyle, ...this.segmentHoverStyle, ...(segment?.highlightDefinition?.style), ...(segment?.highlightDefinition?.hoverStyle) })}
                 onMouseOut={event => this.setStyle(event.currentTarget as HTMLElement, { ...this.segmentStyle, ...(segment?.highlightDefinition?.style) })}
                 onClick={event => this.segmentClick.emit({ ...segment, textContainer: event.currentTarget as HTMLSpanElement })}
-              >{segment.text}</span>
+              >
+                {this.shouldReplaceTextWithTag ? (segment.highlightDefinition?.tag || segment.text) : segment.text}
+              </span>
             ))
           }
         </div>
@@ -78,7 +81,6 @@ export interface HighlightDefinition {
   start: number;
   end: number;
   tag: string;
-  name: string;
   style?: Partial<CSSStyleDeclaration>;
   hoverStyle?: Partial<CSSStyleDeclaration>;
 }
