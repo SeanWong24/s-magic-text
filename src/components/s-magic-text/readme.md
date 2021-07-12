@@ -18,9 +18,9 @@
 
 ## Events
 
-| Event          | Description | Type                                                     |
-| -------------- | ----------- | -------------------------------------------------------- |
-| `segmentClick` |             | `CustomEvent<Segment & { textContainer: HTMLElement; }>` |
+| Event          | Description | Type                                                 |
+| -------------- | ----------- | ---------------------------------------------------- |
+| `segmentClick` |             | `CustomEvent<Segment & { innerEvent: MouseEvent; }>` |
 
 
 ## Methods
