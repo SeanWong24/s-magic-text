@@ -31,6 +31,7 @@ declare namespace LocalJSX {
     interface SMagicText {
         "highlights"?: HighlightDefinition[];
         "onSegmentClick"?: (event: CustomEvent<Segment & { innerEvent: MouseEvent }>) => void;
+        "onSegmentContextMenu"?: (event: CustomEvent<Segment & { innerEvent: MouseEvent }>) => void;
         "segmentHoverStyle"?: Partial<CSSStyleDeclaration>;
         "segmentStyle"?: Partial<CSSStyleDeclaration>;
         "shouldReplaceTextWithTag"?: boolean;

@@ -18,9 +18,10 @@
 
 ## Events
 
-| Event          | Description | Type                                                 |
-| -------------- | ----------- | ---------------------------------------------------- |
-| `segmentClick` |             | `CustomEvent<Segment & { innerEvent: MouseEvent; }>` |
+| Event                | Description | Type                                                 |
+| -------------------- | ----------- | ---------------------------------------------------- |
+| `segmentClick`       |             | `CustomEvent<Segment & { innerEvent: MouseEvent; }>` |
+| `segmentContextMenu` |             | `CustomEvent<Segment & { innerEvent: MouseEvent; }>` |
 
 
 ## Methods

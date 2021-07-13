@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  <s-magic-text text="Hello world, I am here!"></s-magic-text>
+  <s-magic-text text="Hello world, I am here!" oncontextmenu="preventDefault()"></s-magic-text>
   <button onclick="toggleTagDisplay()">Toggle Tag Display</button>
 
   <script>
@@ -24,9 +24,17 @@
       console.log(event.detail);
       console.log(await event.currentTarget.getSegments());
     });
+    magicText.addEventListener('segmentContextMenu', async event => {
+      console.log(event.detail);
+      console.log(await event.currentTarget.getSegments());
+    });
 
     function toggleTagDisplay() {
       magicText.shouldReplaceTextWithTag = !magicText.shouldReplaceTextWithTag;
+    }
+
+    function preventDefault() {
+      event.preventDefault();
     }
   </script>
 </body>

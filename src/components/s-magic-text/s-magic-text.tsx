@@ -17,6 +17,7 @@ export class SMagicText implements ComponentInterface {
   @State() segments: Segment[];
 
   @Event() segmentClick: EventEmitter<Segment & { innerEvent: MouseEvent }>;
+  @Event() segmentContextMenu: EventEmitter<Segment & { innerEvent: MouseEvent }>;
 
   componentWillRender() {
     const textSegmentsWithSpaces = this.text
@@ -60,6 +61,7 @@ export class SMagicText implements ComponentInterface {
                 onMouseOver={event => this.setStyle(event.currentTarget as HTMLElement, { ...this.segmentStyle, ...this.segmentHoverStyle, ...(segment?.highlightDefinition?.style), ...(segment?.highlightDefinition?.hoverStyle) })}
                 onMouseOut={event => this.setStyle(event.currentTarget as HTMLElement, { ...this.segmentStyle, ...(segment?.highlightDefinition?.style) })}
                 onClick={event => this.segmentClick.emit({ ...segment, innerEvent: event })}
+                onContextMenu={event => this.segmentClick.emit({ ...segment, innerEvent: event })}
               >
                 {this.shouldReplaceTextWithTag ? (segment.highlightDefinition?.tag || segment.text) : segment.text}
               </span>
