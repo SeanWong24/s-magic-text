@@ -5,14 +5,14 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { HighlightDefinition, Segment } from "./components/s-magic-text/s-magic-text";
+import { Segment, Tag } from "./components/s-magic-text/s-magic-text";
 export namespace Components {
     interface SMagicText {
         "getSegments": () => Promise<Segment[]>;
-        "highlights": HighlightDefinition[];
         "segmentHoverStyle": Partial<CSSStyleDeclaration>;
         "segmentStyle": Partial<CSSStyleDeclaration>;
         "shouldReplaceTextWithTag": boolean;
+        "tags": Tag[];
         "text": string;
     }
 }
@@ -29,12 +29,12 @@ declare global {
 }
 declare namespace LocalJSX {
     interface SMagicText {
-        "highlights"?: HighlightDefinition[];
         "onSegmentClick"?: (event: CustomEvent<Segment & { innerEvent: MouseEvent }>) => void;
         "onSegmentContextMenu"?: (event: CustomEvent<Segment & { innerEvent: MouseEvent }>) => void;
         "segmentHoverStyle"?: Partial<CSSStyleDeclaration>;
         "segmentStyle"?: Partial<CSSStyleDeclaration>;
         "shouldReplaceTextWithTag"?: boolean;
+        "tags"?: Tag[];
         "text"?: string;
     }
     interface IntrinsicElements {

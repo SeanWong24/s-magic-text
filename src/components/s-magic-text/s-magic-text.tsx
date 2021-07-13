@@ -8,7 +8,7 @@ import { Component, Event, EventEmitter, Host, h, ComponentInterface, Prop, Stat
 export class SMagicText implements ComponentInterface {
 
   @Prop() text: string;
-  @Prop() highlights: HighlightDefinition[];
+  @Prop() tags: Tag[];
   @Prop() shouldReplaceTextWithTag = false;
   @Prop() segmentStyle: Partial<CSSStyleDeclaration> = { cursor: 'pointer', userSelect: 'none' };
   @Prop() segmentHoverStyle: Partial<CSSStyleDeclaration> = { backgroundColor: 'orange' };
@@ -25,9 +25,9 @@ export class SMagicText implements ComponentInterface {
       .filter(Boolean);
     const segments: Segment[] = [];
     let textLength = 0;
-    let previousHighlight: HighlightDefinition;
+    let previousHighlight: Tag;
     textSegmentsWithSpaces.forEach(textSegment => {
-      const highlight = this.highlights?.find(highlight => highlight.start <= textLength && highlight.end >= (textLength + textSegment.length));
+      const highlight = this.tags?.find(highlight => highlight.start <= textLength && highlight.end >= (textLength + textSegment.length));
       let segment: Segment;
       if (highlight) {
         segment = (highlight === previousHighlight) ? segments.pop() : { text: '', start: textLength, end: textLength };
@@ -56,14 +56,14 @@ export class SMagicText implements ComponentInterface {
           {
             this.segments?.map(segment => (
               <span
-                title={this.shouldReplaceTextWithTag ? segment.text : segment?.highlightDefinition?.tag}
+                title={this.shouldReplaceTextWithTag ? segment.text : segment?.highlightDefinition?.name}
                 style={{ ...this.segmentStyle, ...(segment?.highlightDefinition?.style) } as any}
                 onMouseOver={event => this.setStyle(event.currentTarget as HTMLElement, { ...this.segmentStyle, ...this.segmentHoverStyle, ...(segment?.highlightDefinition?.style), ...(segment?.highlightDefinition?.hoverStyle) })}
                 onMouseOut={event => this.setStyle(event.currentTarget as HTMLElement, { ...this.segmentStyle, ...(segment?.highlightDefinition?.style) })}
                 onClick={event => this.segmentClick.emit({ ...segment, innerEvent: event })}
                 onContextMenu={event => this.segmentClick.emit({ ...segment, innerEvent: event })}
               >
-                {this.shouldReplaceTextWithTag ? (segment.highlightDefinition?.tag || segment.text) : segment.text}
+                {this.shouldReplaceTextWithTag ? (segment.highlightDefinition?.name || segment.text) : segment.text}
               </span>
             ))
           }
@@ -79,10 +79,10 @@ export class SMagicText implements ComponentInterface {
 
 }
 
-export interface HighlightDefinition {
+export interface Tag {
   start: number;
   end: number;
-  tag: string;
+  name: string;
   style?: Partial<CSSStyleDeclaration>;
   hoverStyle?: Partial<CSSStyleDeclaration>;
 }
@@ -91,5 +91,5 @@ export interface Segment {
   start: number;
   end: number;
   text: string;
-  highlightDefinition?: HighlightDefinition;
+  highlightDefinition?: Tag;
 }
