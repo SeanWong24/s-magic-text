@@ -18,7 +18,7 @@
     const magicText = document.querySelector('s-magic-text');
     magicText.tags = [
       { start: 6, end: 11, name: 'A', style: { color: 'blue' } },
-      { start: 13, end: 17, name: 'B', style: { color: 'red' } },
+      { start: 13, end: 17, name: 'B', label: 'oOo', style: { color: 'red' }, labelStyle: {color: 'blue'} },
     ];
     magicText.addEventListener('segmentClick', async event => {
       console.log(event.detail);

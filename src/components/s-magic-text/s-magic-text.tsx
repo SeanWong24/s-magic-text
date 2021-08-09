@@ -12,6 +12,7 @@ export class SMagicText implements ComponentInterface {
   @Prop() shouldReplaceTextWithTag = false;
   @Prop() segmentStyle: Partial<CSSStyleDeclaration> = { cursor: 'pointer', userSelect: 'none' };
   @Prop() segmentHoverStyle: Partial<CSSStyleDeclaration> = { backgroundColor: 'orange' };
+  @Prop() labelStyle: Partial<CSSStyleDeclaration> = { borderRadius: '.5em', backgroundColor: 'bisque' };
 
 
   @State() segments: Segment[];
@@ -32,7 +33,7 @@ export class SMagicText implements ComponentInterface {
       if (highlight) {
         segment = (highlight === previousHighlight) ? segments.pop() : { text: '', start: textLength, end: textLength };
         segment.text += textSegment;
-        segment.highlightDefinition = highlight;
+        segment.tag = highlight;
         previousHighlight = highlight;
       } else {
         segment = { text: textSegment, start: textLength, end: textLength };
@@ -56,14 +57,18 @@ export class SMagicText implements ComponentInterface {
           {
             this.segments?.map(segment => (
               <span
-                title={this.shouldReplaceTextWithTag ? segment.text : segment?.highlightDefinition?.name}
-                style={{ ...this.segmentStyle, ...(segment?.highlightDefinition?.style) } as any}
-                onMouseOver={event => this.setStyle(event.currentTarget as HTMLElement, { ...this.segmentStyle, ...this.segmentHoverStyle, ...(segment?.highlightDefinition?.style), ...(segment?.highlightDefinition?.hoverStyle) })}
-                onMouseOut={event => this.setStyle(event.currentTarget as HTMLElement, { ...this.segmentStyle, ...(segment?.highlightDefinition?.style) })}
+                title={this.shouldReplaceTextWithTag ? segment.text : segment?.tag?.name}
+                style={{ ...this.segmentStyle, ...(segment?.tag?.style) } as any}
+                onMouseOver={event => this.setStyle(event.currentTarget as HTMLElement, { ...this.segmentStyle, ...this.segmentHoverStyle, ...(segment?.tag?.style), ...(segment?.tag?.hoverStyle) })}
+                onMouseOut={event => this.setStyle(event.currentTarget as HTMLElement, { ...this.segmentStyle, ...(segment?.tag?.style) })}
                 onClick={event => this.segmentClick.emit({ ...segment, innerEvent: event })}
                 onContextMenu={event => this.segmentClick.emit({ ...segment, innerEvent: event })}
               >
-                {this.shouldReplaceTextWithTag ? (segment.highlightDefinition?.name || segment.text) : segment.text}
+                {this.shouldReplaceTextWithTag ? (segment.tag?.name || segment.text) : segment.text}
+                {
+                  segment.tag?.label &&
+                  <span style={{ ...this.labelStyle, ...(segment?.tag?.labelStyle) } as any}>{segment.tag.label}</span>
+                }
               </span>
             ))
           }
@@ -83,13 +88,15 @@ export interface Tag {
   start: number;
   end: number;
   name: string;
+  label?: string;
   style?: Partial<CSSStyleDeclaration>;
   hoverStyle?: Partial<CSSStyleDeclaration>;
+  labelStyle?: Partial<CSSStyleDeclaration>;
 }
 
 export interface Segment {
   start: number;
   end: number;
   text: string;
-  highlightDefinition?: Tag;
+  tag?: Tag;
 }

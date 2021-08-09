@@ -9,6 +9,7 @@ import { Segment, Tag } from "./components/s-magic-text/s-magic-text";
 export namespace Components {
     interface SMagicText {
         "getSegments": () => Promise<Segment[]>;
+        "labelStyle": Partial<CSSStyleDeclaration>;
         "segmentHoverStyle": Partial<CSSStyleDeclaration>;
         "segmentStyle": Partial<CSSStyleDeclaration>;
         "shouldReplaceTextWithTag": boolean;
@@ -29,6 +30,7 @@ declare global {
 }
 declare namespace LocalJSX {
     interface SMagicText {
+        "labelStyle"?: Partial<CSSStyleDeclaration>;
         "onSegmentClick"?: (event: CustomEvent<Segment & { innerEvent: MouseEvent }>) => void;
         "onSegmentContextMenu"?: (event: CustomEvent<Segment & { innerEvent: MouseEvent }>) => void;
         "segmentHoverStyle"?: Partial<CSSStyleDeclaration>;
