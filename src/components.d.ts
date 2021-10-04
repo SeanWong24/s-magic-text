@@ -11,6 +11,7 @@ export namespace Components {
         "getSegments": () => Promise<Segment[]>;
         "labelStyle": Partial<CSSStyleDeclaration>;
         "segmentHoverStyle": Partial<CSSStyleDeclaration>;
+        "segmentSplitRegExp": RegExp;
         "segmentStyle": Partial<CSSStyleDeclaration>;
         "shouldReplaceTextWithTag": boolean;
         "tags": Tag[];
@@ -34,6 +35,7 @@ declare namespace LocalJSX {
         "onSegmentClick"?: (event: CustomEvent<Segment & { innerEvent: MouseEvent }>) => void;
         "onSegmentContextMenu"?: (event: CustomEvent<Segment & { innerEvent: MouseEvent }>) => void;
         "segmentHoverStyle"?: Partial<CSSStyleDeclaration>;
+        "segmentSplitRegExp"?: RegExp;
         "segmentStyle"?: Partial<CSSStyleDeclaration>;
         "shouldReplaceTextWithTag"?: boolean;
         "tags"?: Tag[];

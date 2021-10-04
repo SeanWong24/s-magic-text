@@ -7,22 +7,22 @@ import { Component, Event, EventEmitter, Host, h, ComponentInterface, Prop, Stat
 })
 export class SMagicText implements ComponentInterface {
 
+  @State() segments: Segment[];
+
   @Prop() text: string;
   @Prop() tags: Tag[];
   @Prop() shouldReplaceTextWithTag = false;
+  @Prop() segmentSplitRegExp = /([^\w\'])/g;
   @Prop() segmentStyle: Partial<CSSStyleDeclaration> = { cursor: 'pointer', userSelect: 'none' };
   @Prop() segmentHoverStyle: Partial<CSSStyleDeclaration> = { backgroundColor: 'orange' };
   @Prop() labelStyle: Partial<CSSStyleDeclaration> = { borderRadius: '.5em', backgroundColor: 'bisque' };
-
-
-  @State() segments: Segment[];
 
   @Event() segmentClick: EventEmitter<Segment & { innerEvent: MouseEvent }>;
   @Event() segmentContextMenu: EventEmitter<Segment & { innerEvent: MouseEvent }>;
 
   componentWillRender() {
     const textSegmentsWithSpaces = this.text
-      .split(/([^\w])/g)
+      .split(this.segmentSplitRegExp)
       .filter(Boolean);
     const segments: Segment[] = [];
     let textLength = 0;
