@@ -50,6 +50,11 @@ export class SMagicText implements ComponentInterface {
     return this.segments;
   }
 
+  @Method()
+  async getTextReplacedByTags() {
+    return this.segments?.map(segment => segment.tag?.name || segment.text).join('');
+  }
+
   render() {
     return (
       <Host>

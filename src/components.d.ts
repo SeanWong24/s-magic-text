@@ -9,6 +9,7 @@ import { Segment, Tag } from "./components/s-magic-text/s-magic-text";
 export namespace Components {
     interface SMagicText {
         "getSegments": () => Promise<Segment[]>;
+        "getTextReplacedByTags": () => Promise<string>;
         "labelStyle": Partial<CSSStyleDeclaration>;
         "segmentHoverStyle": Partial<CSSStyleDeclaration>;
         "segmentSplitRegExp": RegExp;

@@ -38,6 +38,16 @@ Type: `Promise<Segment[]>`
 
 
 
+### `getTextReplacedByTags() => Promise<string>`
+
+
+
+#### Returns
+
+Type: `Promise<string>`
+
+
+
 
 ----------------------------------------------
 
